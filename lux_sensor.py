@@ -15,6 +15,10 @@ libdir = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__)
 if os.path.exists(libdir):
     sys.path.append(libdir)
 
+with open("/home/fotisber/project/blynk_pi_token.txt") as f:
+    BLYNK_TOKEN = f.read().strip()
+
+print("BLYNK TOKEN: ",BLYNK_TOKEN)
 # suppress unwanted  info from TSL module 
 logging.basicConfig(level=logging.INFO)
 
@@ -24,7 +28,7 @@ sensor = TSL2591.TSL2591()
 try:
     lux = sensor.Lux
     print('Lux: %d'%lux)
-    requests.get(f"https://blynk.cloud/external/api/update?token=R3K5bjsV7EmX625W4h5rQi7JeNfsImBT&V0={lux}")
+
     prev_avg = 0 
     while True:
         
@@ -51,7 +55,7 @@ try:
                     r = requests.get(
                         "https://blynk.cloud/external/api/logEvent",
                         params={
-                            "token": "R3K5bjsV7EmX625W4h5rQi7JeNfsImBT",
+                            "token": BLYNK_TOKEN,
                             "code": "detected_light",
                             "description": "Μήπως άνοιξες το φως; Τσέκαρέ το"
                         }
