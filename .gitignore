@@ -3,3 +3,5 @@ TSL2591X-Light-Sensor/
 __pycache__
 .lgd-nfy0
 blynk_pi_token.txt
+
+*.log
